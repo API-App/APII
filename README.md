@@ -19,17 +19,17 @@ This app will help developers to find APIs and explore project ideas.
 ### App Evaluation
 - **Category:** Productivity 
 - **Mobile:** This app provides a streamlined mobile version of the [public API API](https://api.publicapis.org/).
-- **Story:** Developers will use this app to find insperation for projects, and discorver intersting APIs.
+- **Story:** Developers will use this app to find inspiration for projects, and discorver intersting APIs.
 - **Market:** This API is targeted at programers who intend to work on personnal projects.
 - **Habit:** This app would be used infrequently to help find new project ideas or useful APIs.
-- **Scope:** Provide a streamlined interface for finding APIs to facilitate productive development. Potentaly providing a platform for people to discuss APIs.
+- **Scope:** Provide a streamlined interface for finding APIs to facilitate productive development. Potentially providing a platform for people to discuss APIs.
 
 ## Product Spec
 ### 1. User Stories (Required and Optional)
 
 **Required Must-have Stories**
 
-* Show list of APIs
+* Show list of APIs 
 * Sort APIs by catagory
 * Detail view for APIs
 
