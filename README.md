@@ -25,15 +25,24 @@ This app will help developers to find APIs and explore project ideas.
 
 **Required Must-have Stories**
 
-* Show list of APIs 
+* Show list of APIs
+  * Sorted alphabetically and by category
 * Sort APIs by catagory
 * Detail view for APIs
+* Search bar
+  * Search in APIs
+  * Search in catagories
 
 
 **Optional Nice-to-have Stories**
 
 * Sharing APIs
-* Searching for APIs
+* Applying filters for the API
+  * HTTPS filter
+  * OAuth filter
+  * API key filter
+  * CORS filter
+* Share button  
 
 ### 2. Screen Archetypes
 
