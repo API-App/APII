@@ -73,3 +73,6 @@ This app will help developers to find APIs and explore project ideas.
 * Streams (API & Category) -> Filter & Search 
 * API Stream -> Detail View
 * Detail View -> Share  
+
+## Wireframes
+<img src="https://github.com/API-App/APII/blob/main/APII_Wireframe.jpg" width=800><br>
