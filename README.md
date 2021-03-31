@@ -1,4 +1,4 @@
-Unit 8: Group Milestone - README Example
+Unit 8: Group Milestone - APII
 ===
 
 # APII
@@ -27,16 +27,17 @@ This app will help developers to find APIs and explore project ideas.
 
 * Show list of APIs
   * Sorted alphabetically and by category
-* Sort APIs by cateagory
+* Sort APIs by category
 * Detail view for APIs
 * Search bar
   * Search in APIs
-  * Search in catagories
+  * Search in categories
+* Help page
 
 
 **Optional Nice-to-have Stories**
 
-* Sharing APIs
+* Get Random API 
 * Applying filters for the API
   * HTTPS filter
   * OAuth filter
@@ -47,29 +48,28 @@ This app will help developers to find APIs and explore project ideas.
 ### 2. Screen Archetypes
 
 * Stream Screens
- * Allows users to view a list containing the APIs.
- * Allows users to view a list containing the categories.
+  * Allows users to view a list containing the APIs (API Stream).
+  * Allows users to view a list containing the categories (Category Screen).
 * Search Screen
   * Let's users search for specific APIs.
 * Detail Screen
- * Lists all information about an API.
+  * Lists all information about an API.
 * Help Screen
- * Provides information about the app.
+  * Provides information about the app.
 
 ### 3. Navigation
 
-**Tab Navigation** (Tab to Screen)
+**Menu Navigation** (Menu Item to Screen)
 
-* Music selection
-* Profile
-* Settings
+* All
+* Category
+* Random (optional)
+* Help
 
-Optional:
-* Music/Encounter Queue
-* Discover (Top Choices)
 
 **Flow Navigation** (Screen to Screen)
-* Forced Log-in -> Account creation if no log in is available
-* Music Selection (Or Queue if Optional) -> Jumps to Chat
-* Profile -> Text field to be modified. 
-* Settings -> Toggle settings
+* Open App -> API Stream (All)
+* Category Stream -> API Stream (Category)
+* Streams (API & Category) -> Filter & Search 
+* API Stream -> Detail View
+* Detail View -> Share  
