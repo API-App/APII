@@ -76,3 +76,12 @@ This app will help developers to find APIs and explore project ideas.
 
 ## Wireframes
 <img src="https://github.com/API-App/APII/blob/main/APII_Wireframe.jpg" width=800><br>
+
+### [BONUS] Digital Wireframes & Mockups
+<img src="https://github.com/API-App/APII/blob/main/Menu.png" height=200>
+<img src="https://github.com/API-App/APII/blob/main/API%20Stream%20(All).png" height=200>
+<img src="https://github.com/API-App/APII/blob/main/Category%20Stream.png" height=200>
+<img src="https://github.com/API-App/APII/blob/main/API%20Stream%20(Category).png" height=200>
+<img src="https://github.com/API-App/APII/blob/main/Help%20Page.png" height=200>
+<img src="https://github.com/API-App/APII/blob/main/Detail%20View.png" height=200>
+
