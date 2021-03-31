@@ -85,3 +85,5 @@ This app will help developers to find APIs and explore project ideas.
 <img src="https://github.com/API-App/APII/blob/main/Help%20Page.png" height=200>
 <img src="https://github.com/API-App/APII/blob/main/Detail%20View.png" height=200>
 
+### [BONUS] Interactive Prototype
+<img src="https://github.com/API-App/APII/blob/main/APII_Wireframe_Animation.gif" width=200>
