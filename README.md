@@ -87,3 +87,31 @@ This app will help developers to find APIs and explore project ideas.
 
 ### [BONUS] Interactive Prototype
 <img src="https://github.com/API-App/APII/blob/main/APII_Wireframe_Animation.gif" width=200>
+
+
+## Schema 
+### Data Models
+#### API:
+
+   | Property      | Type     | Description              |
+   | ------------- | -------- | -------------------------|
+   | title         | String   | name of API              |
+   | description   | String   | description of API       |
+   | auth          | String   | type of authentification |
+   | https         | Boolean  | does API support https?  |
+   | cors          | String   | does API support cors?   |
+   | link          | String   | link to API website      |
+   | category      | String   | category of API          |
+   
+### Networking
+#### Existing API Endpoints
+##### Public API for Public APIs 
+- Base URL - [https://api.publicapis.org/](https://api.publicapis.org/)
+
+   HTTP Verb | Endpoint      | Description
+   ----------|---------------|------------
+    `GET`    | /entries      | returns all APIs
+    `GET`    | /random       | returns a random API
+    `GET`    | /categories   | returns list of all categories
+    `GET`    | /health       | checks for status of API server
+    
