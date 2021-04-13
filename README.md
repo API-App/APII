@@ -115,3 +115,6 @@ This app will help developers to find APIs and explore project ideas.
     `GET`    | /categories   | returns list of all categories
     `GET`    | /health       | checks for status of API server
     
+### Completed Stories
+[X] Add API Model - Create API Model with necessary functions
+    
