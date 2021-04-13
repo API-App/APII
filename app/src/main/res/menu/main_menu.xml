@@ -2,10 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_api_stream"
             android:title="All"
-            android:icon="@android:drawable/toast_frame" />
+            android:icon="@android:drawable/ic_menu_slideshow" />
         <item
+            android:id="@+id/nav_categories"
             android:title="Catagories"
-            android:icon="@android:drawable/toast_frame" />
+            android:icon="?attr/actionModeCopyDrawable" />
     </group>
 </menu>
