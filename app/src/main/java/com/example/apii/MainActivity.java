@@ -16,8 +16,19 @@ import java.lang.annotation.Target;
 
 import okhttp3.Headers;
 
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+
+
+import com.google.android.material.navigation.NavigationView;
+
 public class MainActivity extends AppCompatActivity {
 
+    private AppBarConfiguration mAppBarConfiguration;
     public static final String APII_ENTRIES_URL = "https://api.publicapis.org/entries";
     public static final String TAG = "Main Activity";
 
@@ -25,6 +36,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        DrawerLayout drawer = findViewById(R.id.drawer);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+
+        // Creates the menu icon in each fragment
+        mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.nav_api_stream, R.id.nav_categories)
+                .setDrawerLayout(drawer)
+                .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+        NavigationUI.setupWithNavController(navigationView, navController);
 
         // creating a client to make network requests
         AsyncHttpClient client = new AsyncHttpClient();
@@ -40,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                     JSONArray results = jsonObject.getJSONArray("entries");
                     Log.i(TAG, "Number of results: " + results.length());
                 } catch (JSONException e) {
-                    Log.e(TAG,"Hit a json exception ", e);
+                    Log.e(TAG, "Hit a json exception ", e);
                 }
 
             }
@@ -50,6 +74,11 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "onFailure");
             }
         });
-
+    }
+        @Override
+        public boolean onSupportNavigateUp() {
+            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+            return NavigationUI.navigateUp(navController, mAppBarConfiguration)
+                    || super.onSupportNavigateUp();
     }
 }
