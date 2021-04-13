@@ -75,18 +75,18 @@ This app will help developers to find APIs and explore project ideas.
 * Detail View -> Share  
 
 ## Wireframes
-<img src="https://github.com/API-App/APII/blob/main/APII_Wireframe.jpg" width=800><br>
+<img src="https://github.com/API-App/APII/blob/main/wireframe/APII_Wireframe.jpg" width=800><br>
 
 ### [BONUS] Digital Wireframes & Mockups
 <img src="https://github.com/API-App/APII/blob/main/wireframe/Menu.png" height=200>
-<img src="https://github.com/API-App/APII/blob/main/API%20Stream%20(All).png" height=200>
-<img src="https://github.com/API-App/APII/blob/main/Category%20Stream.png" height=200>
-<img src="https://github.com/API-App/APII/blob/main/API%20Stream%20(Category).png" height=200>
-<img src="https://github.com/API-App/APII/blob/main/Help%20Page.png" height=200>
-<img src="https://github.com/API-App/APII/blob/main/Detail%20View.png" height=200>
+<img src="https://github.com/API-App/APII/blob/main/wireframe/API%20Stream%20(All).png" height=200>
+<img src="https://github.com/API-App/APII/blob/main/wireframe/Category%20Stream.png" height=200>
+<img src="https://github.com/API-App/APII/blob/main/wireframe/API%20Stream%20(Category).png" height=200>
+<img src="https://github.com/API-App/APII/blob/main/wireframe/Help%20Page.png" height=200>
+<img src="https://github.com/API-App/APII/blob/main/wireframe/Detail%20View.png" height=200>
 
 ### [BONUS] Interactive Prototype
-<img src="https://github.com/API-App/APII/blob/main/APII_Wireframe_Animation.gif" width=200>
+<img src="https://github.com/API-App/APII/blob/main/wireframe/APII_Wireframe_Animation.gif" width=200>
 
 
 ## Schema 
@@ -114,4 +114,7 @@ This app will help developers to find APIs and explore project ideas.
     `GET`    | /random       | returns a random API
     `GET`    | /categories   | returns list of all categories
     `GET`    | /health       | checks for status of API server
+    
+### Completed Stories
+[X] Add API Model - Create API Model with necessary functions
     
