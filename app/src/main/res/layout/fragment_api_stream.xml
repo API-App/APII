@@ -5,10 +5,25 @@
     android:layout_height="match_parent"
     tools:context=".ApiStream">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="API STREAM" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/streamApis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="API STREAM"
+            android:textAllCaps="true"
+            android:textSize="24sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvApis"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/streamApis"
+            android:layout_marginTop="5dp" />
+
+    </RelativeLayout>
 
 </FrameLayout>
