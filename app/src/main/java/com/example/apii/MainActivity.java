@@ -35,13 +35,21 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
+import com.google.android.material.navigation.NavigationView;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-    public static final String APII_ENTRIES_URL = "https://api.publicapis.org/entries";
+    public static final String APII_CATEGORIES_URL = "https://api.publicapis.org/categories";
     public static final String TAG = "Main Activity";
     private NavController navController;
+    List<String> categories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,12 +61,12 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
 
 
-        // creating a client to make network requests
+        // Creating a client to make network requests
         AsyncHttpClient client = new AsyncHttpClient();
 
-        // I could put this in a separate method to make the request
-        // makeRequest(client, ULR)
-        client.get(APII_ENTRIES_URL, new JsonHttpResponseHandler() {
+        // Make request for categories
+        // Store in List<String> categories
+        client.get(APII_CATEGORIES_URL, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Headers headers, JSON json) {
                 Log.d(TAG, "onSuccess");
@@ -71,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     Log.e(TAG, "Hit a json exception ", e);
                 }
+                JSONArray results = json.jsonArray;
+                categories = fromJsonArray(results);
+                Log.i(TAG, "Category Len: " + String.valueOf(categories.size()));
             }
 
             @Override
@@ -78,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "onFailure");
             }
         });
+
     }
 
     public void setUpNavMenu(NavigationView navigationView, DrawerLayout drawer, List<API> apis) {
@@ -106,10 +118,24 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+    private List<String> fromJsonArray(JSONArray results) {
+        List<String> categories = new ArrayList<>() ;
+        for(int i=0;i<results.length();i++){
+            try{
+                categories.add(results.getString(i));
+            } catch (JSONException e){
+                e.printStackTrace();
+            }
+        }
+        return categories;
+    }
+
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
 }

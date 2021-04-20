@@ -5,10 +5,24 @@
     android:layout_height="match_parent"
     tools:context=".Categories">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="CATEGORIES" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/streamCategories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Categories"
+            android:textAllCaps="true" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCategories"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/streamCategories"
+            android:layout_marginTop="5dp" />
+
+    </RelativeLayout>
 
 </FrameLayout>
