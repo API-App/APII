@@ -1,51 +1,38 @@
 package com.example.apii;
 
+import android.os.Bundle;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-
-import com.codepath.asynchttpclient.AsyncHttpClient;
-import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.parceler.Parcels;
-
-import okhttp3.Headers;
-
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavArgs;
-import androidx.navigation.NavArgument;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-
+import com.codepath.asynchttpclient.AsyncHttpClient;
+import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.apii.Models.API;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.List;
-import com.google.android.material.navigation.NavigationView;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
+
+import okhttp3.Headers;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+    public static final String APII_ENTRIES_URL = "https://api.publicapis.org/entries";
     public static final String APII_CATEGORIES_URL = "https://api.publicapis.org/categories";
     public static final String TAG = "Main Activity";
     private NavController navController;
@@ -60,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         DrawerLayout drawer = findViewById(R.id.drawer);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
+        setUpNavWithRandom(navigationView, drawer);
 
         // Creating a client to make network requests
         AsyncHttpClient client = new AsyncHttpClient();
@@ -70,15 +58,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int i, Headers headers, JSON json) {
                 Log.d(TAG, "onSuccess");
-                JSONObject jsonObject = json.jsonObject;
-                try {
-                    JSONArray results = jsonObject.getJSONArray("entries");
-                    Log.i(TAG, "Number of results: " + results.length());
-                    setUpNavMenu(navigationView, drawer, API.fromJsonArray(results));
-                    List<API> apis = API.fromJsonArray(results);
-                } catch (JSONException e) {
-                    Log.e(TAG, "Hit a json exception ", e);
-                }
                 JSONArray results = json.jsonArray;
                 categories = fromJsonArray(results);
                 Log.i(TAG, "Category Len: " + String.valueOf(categories.size()));
@@ -138,4 +117,30 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
+    private void setUpNavWithRandom(NavigationView navigationView, DrawerLayout drawer){
+        // Creating a client to make network requests
+        AsyncHttpClient client = new AsyncHttpClient();
+
+        // Make request for all API entries
+        // Store in List<API> apis
+        client.get(APII_ENTRIES_URL, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int i, Headers headers, JSON json) {
+                Log.d(TAG, "onSuccess: all entities");
+                JSONObject jsonObject = json.jsonObject;
+                try {
+                    JSONArray results = jsonObject.getJSONArray("entries");
+                    Log.i(TAG, "Number of results: " + results.length());
+                    setUpNavMenu(navigationView, drawer, API.fromJsonArray(results));
+                    List<API> apis = API.fromJsonArray(results);
+                } catch (JSONException e) {
+                    Log.e(TAG, "Hit a json exception ", e);
+                }
+            }
+            @Override
+            public void onFailure(int i, Headers headers, String s, Throwable throwable) {
+                Log.d(TAG, "OnFailure: all entities");
+            }
+        });
+    }
 }
