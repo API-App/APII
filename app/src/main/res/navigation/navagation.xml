@@ -16,4 +16,18 @@
         android:name="com.example.apii.Categories"
         android:label="Categories"
         tools:layout="@layout/fragment_categories" />
+    <fragment
+        android:id="@+id/nav_random"
+        android:name="com.example.apii.DetailView"
+        android:label="Random"
+        tools:layout="@layout/fragment_categories" >
+        <argument
+            android:name="api"
+            app:argType="com.example.apii.Models.API$$Parcelable" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_detail_view"
+        android:name="com.example.apii.DetailView"
+        android:label="API"
+        tools:layout="@layout/fragment_categories" />
 </navigation>
