@@ -9,5 +9,9 @@
             android:id="@+id/nav_categories"
             android:title="Catagories"
             android:icon="?attr/actionModeCopyDrawable" />
+        <item
+            android:id="@+id/nav_random"
+            android:title="Random"
+            android:icon="@android:drawable/toast_frame" />
     </group>
 </menu>
