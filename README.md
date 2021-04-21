@@ -126,3 +126,8 @@ Here's a walkthrough of implemented user stories:
 <img src="https://github.com/API-App/APII/blob/main/gifs/sprint1.gif" width=250><br>
 
 GIF created with [Gif Maker](https://play.google.com/store/apps/details?id=com.media.zatashima.studio&hl=en_US&gl=US).
+
+## Sprint 2
+### Completed Stories
+- [x] Detail View
+- [x] Random API button
