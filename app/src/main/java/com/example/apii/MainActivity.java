@@ -50,27 +50,6 @@ public class MainActivity extends AppCompatActivity {
 
         setUpNavWithRandom(navigationView, drawer);
 
-        // Creating a client to make network requests
-        AsyncHttpClient client = new AsyncHttpClient();
-
-
-        // Make request for categories
-        // Store in List<String> categories
-        client.get(APII_CATEGORIES_URL, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int i, Headers headers, JSON json) {
-                Log.d(TAG, "onSuccess");
-                JSONArray results = json.jsonArray;
-                categories = fromJsonArray(results);
-                Log.i(TAG, "Category Len: " + String.valueOf(categories.size()));
-            }
-
-            @Override
-            public void onFailure(int i, Headers headers, String s, Throwable throwable) {
-                Log.d(TAG, "onFailure");
-            }
-        });
-
     }
 
     private void setUpNavWithRandom(NavigationView navigationView, DrawerLayout drawer){
@@ -124,18 +103,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    private List<String> fromJsonArray(JSONArray results) {
-        List<String> categories = new ArrayList<>() ;
-        for(int i=0;i<results.length();i++){
-            try{
-                categories.add(results.getString(i));
-            } catch (JSONException e){
-                e.printStackTrace();
-            }
-        }
-        return categories;
     }
 
     @Override
