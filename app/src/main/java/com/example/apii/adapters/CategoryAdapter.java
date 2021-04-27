@@ -4,19 +4,21 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.apii.Models.API;
 import com.example.apii.Models.Category;
 import com.example.apii.R;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
+public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> implements Filterable {
 
     Context context;
     List<Category> categories;
@@ -65,6 +67,40 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             tvTitle.setText(category.getCategory());
         }
     }
+
+    // Search functionality support
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
+
+    Filter filter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            String search = constraint.toString();
+            List<Category> filteredList = new ArrayList<>();
+            FilterResults results = new FilterResults();
+
+            if(search.isEmpty()) {
+                results.values = allCategories;
+                return results;
+            }
+
+            for(Category cat : allCategories) {
+                if (cat.getCategory().toLowerCase().contains(search.toLowerCase()))
+                    filteredList.add(cat);
+            }
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            categories.clear();
+            categories.addAll((Collection<? extends Category>) results.values);
+            notifyDataSetChanged();
+        }
+    };
 
     public void setAllCategories(List<Category> allCategories) {
         this.allCategories.addAll(allCategories);

@@ -89,7 +89,8 @@ public class ApiAdapter extends RecyclerView.Adapter<ApiAdapter.ViewHolder> impl
             }
 
             for(API api : allApis) {
-                if (api.getTitle().contains(search) || api.getDescription().contains(search))
+                if (api.getTitle().toLowerCase().contains(search.toLowerCase()) ||
+                        api.getDescription().toLowerCase().contains(search.toLowerCase()))
                     filteredList.add(api);
             }
             results.values = filteredList;
@@ -99,7 +100,6 @@ public class ApiAdapter extends RecyclerView.Adapter<ApiAdapter.ViewHolder> impl
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             apis.clear();
-            Log.d("eee", "Publish " + constraint + ((ArrayList)results.values).size());
             apis.addAll((Collection<? extends API>) results.values);
             notifyDataSetChanged();
         }
