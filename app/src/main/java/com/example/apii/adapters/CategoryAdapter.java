@@ -4,24 +4,31 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.apii.Categories;
+import com.example.apii.Models.Category;
 import com.example.apii.R;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
+public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> implements Filterable {
 
     Context context;
-    List<Categories> categories;
+    List<Category> categories;
+    private List<Category> allCategories;
 
-    public CategoryAdapter(Context context, List<Categories> categories) {
+    public CategoryAdapter(Context context, List<Category> categories) {
         this.context = context;
         this.categories = categories;
+        // List of all APIs for filtering and searching
+        allCategories = new ArrayList<Category>(categories);
     }
 
     // Usually involves inflating a layout from XML and returning the holder
@@ -34,11 +41,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     // Involves populating data into the item through holder
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CategoryAdapter.ViewHolder holder, int position) {
         // Get the api at the position
-        Categories api = categories.get(position);
+        Category category = categories.get(position);
         // Bind the api title to VH
-        holder.bind(categories);
+        holder.bind(category);
     }
 
     // Returns the total count of items in the list
@@ -56,9 +63,46 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             tvTitle = itemView.findViewById(R.id.tvTitle);
         }
 
-        public void bind(List<Categories> api) {
-            tvTitle.setText(categories.toString());
+        public void bind(Category category) {
+            tvTitle.setText(category.getCategory());
         }
     }
-}
 
+    // Search functionality support
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
+
+    Filter filter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            String search = constraint.toString();
+            List<Category> filteredList = new ArrayList<>();
+            FilterResults results = new FilterResults();
+
+            if(search.isEmpty()) {
+                results.values = allCategories;
+                return results;
+            }
+
+            for(Category cat : allCategories) {
+                if (cat.getCategory().toLowerCase().contains(search.toLowerCase()))
+                    filteredList.add(cat);
+            }
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            categories.clear();
+            categories.addAll((Collection<? extends Category>) results.values);
+            notifyDataSetChanged();
+        }
+    };
+
+    public void setAllCategories(List<Category> allCategories) {
+        this.allCategories.addAll(allCategories);
+    }
+}

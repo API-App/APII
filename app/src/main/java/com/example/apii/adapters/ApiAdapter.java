@@ -1,10 +1,13 @@
 package com.example.apii.adapters;
 
+import android.content.AsyncQueryHandler;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,16 +16,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.apii.Models.API;
 import com.example.apii.R;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-public class ApiAdapter extends RecyclerView.Adapter<ApiAdapter.ViewHolder>{
+public class ApiAdapter extends RecyclerView.Adapter<ApiAdapter.ViewHolder> implements Filterable {
 
     Context context;
     List<API> apis;
+    private List<API> allApis;
 
     public ApiAdapter(Context context, List<API> apis) {
         this.context = context;
         this.apis = apis;
+        // List of all APIs for filtering and searching
+        allApis = new ArrayList<API>(apis);
     }
 
     // Usually involves inflating a layout from XML and returning the holder
@@ -60,5 +68,44 @@ public class ApiAdapter extends RecyclerView.Adapter<ApiAdapter.ViewHolder>{
         public void bind(API api) {
             tvTitle.setText(api.getTitle());
         }
+    }
+
+    // Search functionality support
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
+
+    Filter filter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            String search = constraint.toString();
+            List<API> filteredList = new ArrayList<API>();
+            FilterResults results = new FilterResults();
+
+            if(search.isEmpty()) {
+                results.values = allApis;
+                return results;
+            }
+
+            for(API api : allApis) {
+                if (api.getTitle().toLowerCase().contains(search.toLowerCase()) ||
+                        api.getDescription().toLowerCase().contains(search.toLowerCase()))
+                    filteredList.add(api);
+            }
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            apis.clear();
+            apis.addAll((Collection<? extends API>) results.values);
+            notifyDataSetChanged();
+        }
+    };
+
+    public void setAllApis(List<API> allApis) {
+        this.allApis.addAll(allApis);
     }
 }

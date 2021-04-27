@@ -129,5 +129,17 @@ GIF created with [Gif Maker](https://play.google.com/store/apps/details?id=com.m
 
 ## Sprint 2
 ### Completed Stories
+- [x] API Recycler View
 - [x] Detail View
 - [x] Random API button
+
+### Video Walkthrough
+Here's a walkthrough of implemented user stories:
+
+<img src="https://github.com/API-App/APII/blob/main/APII_ApiStream_and_DetailView.gif" width=200>
+
+## Sprint 3
+### Completed Stories
+- [x] Seaching
+   - [x] Add search icon to the top in the appropriate menus
+   - [x] Add search logic for categories and API stream
