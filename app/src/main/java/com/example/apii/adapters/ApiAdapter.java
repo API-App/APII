@@ -1,20 +1,27 @@
 package com.example.apii.adapters;
 
+import android.app.Activity;
 import android.content.AsyncQueryHandler;
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.apii.Models.API;
 import com.example.apii.R;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,6 +32,7 @@ public class ApiAdapter extends RecyclerView.Adapter<ApiAdapter.ViewHolder> impl
     Context context;
     List<API> apis;
     private List<API> allApis;
+    RelativeLayout container;
 
     public ApiAdapter(Context context, List<API> apis) {
         this.context = context;
@@ -47,7 +55,7 @@ public class ApiAdapter extends RecyclerView.Adapter<ApiAdapter.ViewHolder> impl
         // Get the api at the position
         API api = apis.get(position);
         // Bind the api title to VH
-        holder.bind(api);
+        holder.bind(api, context);
     }
 
     // Returns the total count of items in the list
@@ -63,10 +71,22 @@ public class ApiAdapter extends RecyclerView.Adapter<ApiAdapter.ViewHolder> impl
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tvTitle);
+            container = itemView.findViewById(R.id.container);
         }
 
-        public void bind(API api) {
+        public void bind(API api, Context context) {
             tvTitle.setText(api.getTitle());
+
+            NavController navController = Navigation.findNavController((Activity) context, R.id.nav_host_fragment);
+            container.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle arguments = new Bundle();
+                    arguments.putParcelable("api", Parcels.wrap(api));
+                    navController.navigate(R.id.nav_detail_view, arguments);
+                }
+            });
+
         }
     }
 

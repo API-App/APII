@@ -18,6 +18,25 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/tv_cat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_title"
+        android:layout_alignParentStart="true"
+        android:paddingLeft="5dp"
+        android:text="Category:"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/cat_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/tv_cat"
+        android:layout_alignTop="@+id/tv_cat"
+        android:paddingLeft="5dp"
+        android:text="TextView" />
+
+    <TextView
         android:id="@+id/tv_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,9 +58,9 @@
         android:id="@+id/tv_description_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_title"
+        android:layout_below="@+id/tv_cat"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
+        android:layout_marginTop="5dp"
         android:text="Description:"
         android:paddingLeft="5dp"
         android:textStyle="bold" />
