@@ -2,6 +2,7 @@ package com.example.apii;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         // Creating a client to make network requests
         AsyncHttpClient client = new AsyncHttpClient();
 
+
         // Make request for categories
         // Store in List<String> categories
         client.get(APII_CATEGORIES_URL, new JsonHttpResponseHandler() {
@@ -69,6 +71,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void setUpNavWithRandom(NavigationView navigationView, DrawerLayout drawer){
+        // Creating a client to make network requests
+        AsyncHttpClient client = new AsyncHttpClient();
+
+        // Make request for all API entries
+        // Store in List<API> apis
+        client.get(APII_ENTRIES_URL, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int i, Headers headers, JSON json) {
+                Log.d(TAG, "onSuccess: all entities");
+                JSONObject jsonObject = json.jsonObject;
+                try {
+                    JSONArray results = jsonObject.getJSONArray("entries");
+                    Log.i(TAG, "Number of results: " + results.length());
+                    setUpNavMenu(navigationView, drawer, API.fromJsonArray(results));
+                    List<API> apis = API.fromJsonArray(results);
+                } catch (JSONException e) {
+                    Log.e(TAG, "Hit a json exception ", e);
+                }
+            }
+            @Override
+            public void onFailure(int i, Headers headers, String s, Throwable throwable) {
+                Log.d(TAG, "OnFailure: all entities");
+            }
+        });
     }
 
     public void setUpNavMenu(NavigationView navigationView, DrawerLayout drawer, List<API> apis) {
@@ -97,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
     private List<String> fromJsonArray(JSONArray results) {
         List<String> categories = new ArrayList<>() ;
         for(int i=0;i<results.length();i++){
@@ -115,32 +143,5 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
-    }
-
-    private void setUpNavWithRandom(NavigationView navigationView, DrawerLayout drawer){
-        // Creating a client to make network requests
-        AsyncHttpClient client = new AsyncHttpClient();
-
-        // Make request for all API entries
-        // Store in List<API> apis
-        client.get(APII_ENTRIES_URL, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int i, Headers headers, JSON json) {
-                Log.d(TAG, "onSuccess: all entities");
-                JSONObject jsonObject = json.jsonObject;
-                try {
-                    JSONArray results = jsonObject.getJSONArray("entries");
-                    Log.i(TAG, "Number of results: " + results.length());
-                    setUpNavMenu(navigationView, drawer, API.fromJsonArray(results));
-                    List<API> apis = API.fromJsonArray(results);
-                } catch (JSONException e) {
-                    Log.e(TAG, "Hit a json exception ", e);
-                }
-            }
-            @Override
-            public void onFailure(int i, Headers headers, String s, Throwable throwable) {
-                Log.d(TAG, "OnFailure: all entities");
-            }
-        });
     }
 }
