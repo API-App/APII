@@ -26,6 +26,7 @@ public class DetailView extends Fragment {
     private TextView tvTitle;
     private TextView tvDescription;
     private TextView tvLink;
+    private TextView tvCat;
 
     private TextView tvAuth;
     private TextView tvHttps;
@@ -62,6 +63,7 @@ public class DetailView extends Fragment {
         tvAuth = view.findViewById(R.id.tv_Auth);
         tvCors = view.findViewById(R.id.tv_cors);
         tvHttps = view.findViewById(R.id.tv_https);
+        tvCat = view.findViewById(R.id.tv_cat);
 
         tvTitle.setText(api.getTitle());
         tvLink.setText(api.getLink());
