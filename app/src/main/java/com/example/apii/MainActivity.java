@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     public static final String APII_CATEGORIES_URL = "https://api.publicapis.org/categories";
     public static final String TAG = "Main Activity";
     private NavController navController;
-    List<String> categories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(TAG, rand_api.getTitle());
                     // TODO: Use this code in API stream code to navigate to a detail view
                     // in other areas you need: Bundle arguments = new Bundle();
+
                     arguments.putParcelable("api", Parcels.wrap(rand_api));
                     navController.navigate(R.id.nav_detail_view, arguments);
                 }
