@@ -8,6 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.apii.Models.API;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Categories#newInstance} factory method to
@@ -22,7 +31,6 @@ public class Categories extends Fragment {
 
     // TODO: Rename and change types of parameters
     private String mParam1;
-    private String mParam2;
 
     public Categories() {
         // Required empty public constructor
@@ -41,9 +49,20 @@ public class Categories extends Fragment {
         Categories fragment = new Categories();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    public static List<String> fromJsonArray(JSONArray categoriesJSONArray){
+        List<String> categories = new ArrayList<>();
+        for(int i=0;i<categoriesJSONArray.length();i++){
+            try{
+                categories.add((categoriesJSONArray.getString(i)));
+            } catch (JSONException e){
+                e.printStackTrace();
+            }
+        }
+        return categories;
     }
 
     @Override
@@ -51,7 +70,6 @@ public class Categories extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
