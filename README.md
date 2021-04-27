@@ -143,3 +143,4 @@ Here's a walkthrough of implemented user stories:
 - [x] Seaching
    - [x] Add search icon to the top in the appropriate menus
    - [x] Add search logic for categories and API stream
+- [x] Hooked up the DetailView to the API stream
