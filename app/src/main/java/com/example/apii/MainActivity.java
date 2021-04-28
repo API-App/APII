@@ -2,7 +2,6 @@ package com.example.apii;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,7 +24,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.parceler.Parcels;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Headers;
