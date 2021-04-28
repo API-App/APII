@@ -144,3 +144,10 @@ Here's a walkthrough of implemented user stories:
    - [x] Add search icon to the top in the appropriate menus
    - [x] Add search logic for categories and API stream
 - [x] Hooked up the DetailView to the API stream
+- [X] Set up the Category Recycler View
+- [ ] Refactored API Stream to accept parameters for next sprint
+
+### Video Walkthrough
+Here's a walkthrough of implemented user stories:
+
+<img src="https://github.com/API-App/APII/blob/main/APII_Sprint3.gif" width=200>
