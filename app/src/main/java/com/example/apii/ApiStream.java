@@ -37,10 +37,11 @@ public class ApiStream extends Fragment {
 
     public static final String TAG = "ApiStream";
     public static final String APII_ENTRIES_URL = "https://api.publicapis.org/entries";
+    public static final String APII_CATEGORIES_URL = "https://api.publicapis.org/entries?category=";
     private RecyclerView rvApis;
     private ApiAdapter adapter;
     private List<API> apis;
-
+    String selectedCat;
 
     public ApiStream() {
         // Required empty public constructor
@@ -65,7 +66,7 @@ public class ApiStream extends Fragment {
         rvApis = view.findViewById(R.id.rvApis);
         apis = new ArrayList<>();
         adapter = new ApiAdapter(getContext(),apis);
-
+        //selectedCat = ConfirmationFragmentArgs.fromBundle(getArguments().getString());
         rvApis.setAdapter(adapter);
         rvApis.setLayoutManager(new LinearLayoutManager(getContext()));
         makeRequest();
@@ -78,6 +79,35 @@ public class ApiStream extends Fragment {
         // Make request for all API entries
         // Store in List<API> apis
         client.get(APII_ENTRIES_URL, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int i, Headers headers, JSON json) {
+                Log.d(TAG, "onSuccess");
+                JSONObject jsonObject = json.jsonObject;
+                try {
+                    JSONArray results = jsonObject.getJSONArray("entries");
+                    apis.addAll(API.fromJsonArray(results));
+                    adapter.setAllApis(apis);
+                    adapter.notifyDataSetChanged();
+                } catch (JSONException e) {
+                    Log.e(TAG, "Hit a json exception ", e);
+                }
+
+            }
+
+            @Override
+            public void onFailure(int i, Headers headers, String s, Throwable throwable) {
+                Log.d(TAG, "onFailure");
+            }
+        });
+    }
+
+    private void makeRequest(String selectedCat){
+        // Creating a client to make network requests
+        AsyncHttpClient client = new AsyncHttpClient();
+
+        // Make request for all API entries
+        // Store in List<API> apis
+        client.get(APII_CATEGORIES_URL+selectedCat, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Headers headers, JSON json) {
                 Log.d(TAG, "onSuccess");
