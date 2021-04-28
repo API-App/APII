@@ -66,10 +66,16 @@ public class ApiStream extends Fragment {
         rvApis = view.findViewById(R.id.rvApis);
         apis = new ArrayList<>();
         adapter = new ApiAdapter(getContext(),apis);
-        //selectedCat = ConfirmationFragmentArgs.fromBundle(getArguments().getString());
         rvApis.setAdapter(adapter);
         rvApis.setLayoutManager(new LinearLayoutManager(getContext()));
-        makeRequest();
+
+        try {
+            selectedCat = getArguments().getString("selectedCat");
+            makeRequest(selectedCat);
+        } catch(NullPointerException e){
+            makeRequest();
+        }
+
     }
 
     private void makeRequest(){

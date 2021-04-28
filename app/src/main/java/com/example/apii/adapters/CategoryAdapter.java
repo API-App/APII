@@ -1,18 +1,25 @@
 package com.example.apii.adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.apii.Models.Category;
 import com.example.apii.R;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -57,6 +64,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView tvTitle;
+        RelativeLayout container;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -65,6 +73,17 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
         public void bind(Category category) {
             tvTitle.setText(category.getCategory());
+            container = itemView.findViewById(R.id.container);
+
+            container.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    NavController navController = Navigation.findNavController((Activity) context, R.id.nav_host_fragment);
+                    Bundle arguments = new Bundle();
+                    arguments.putString("selectedCat",category.getCategory());
+                    navController.navigate(R.id.nav_api_stream, arguments);
+                }
+            });
         }
     }
 
