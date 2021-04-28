@@ -65,6 +65,7 @@ public class DetailView extends Fragment {
         tvHttps = view.findViewById(R.id.tv_https);
         tvCat = view.findViewById(R.id.tv_cat);
 
+        tvCat.setText(api.getCategory());
         tvTitle.setText(api.getTitle());
         tvLink.setText(api.getLink());
         tvDescription.setText(api.getDescription());
