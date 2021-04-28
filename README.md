@@ -145,7 +145,8 @@ Here's a walkthrough of implemented user stories:
    - [x] Add search logic for categories and API stream
 - [x] Hooked up the DetailView to the API stream
 - [X] Set up the Category Recycler View
-- [ ] Refactored API Stream to accept parameters for next sprint
+- [x] Refactored API Stream to accept parameters for next sprint
+- [x] Sort categories
 
 ### Video Walkthrough
 Here's a walkthrough of implemented user stories:
