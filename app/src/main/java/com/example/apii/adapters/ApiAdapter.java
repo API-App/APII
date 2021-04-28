@@ -12,6 +12,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
@@ -32,7 +33,6 @@ public class ApiAdapter extends RecyclerView.Adapter<ApiAdapter.ViewHolder> impl
     Context context;
     List<API> apis;
     private List<API> allApis;
-    RelativeLayout container;
 
     public ApiAdapter(Context context, List<API> apis) {
         this.context = context;
@@ -66,6 +66,7 @@ public class ApiAdapter extends RecyclerView.Adapter<ApiAdapter.ViewHolder> impl
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
+        RelativeLayout container;
         TextView tvTitle;
 
         public ViewHolder(@NonNull View itemView) {
@@ -77,10 +78,10 @@ public class ApiAdapter extends RecyclerView.Adapter<ApiAdapter.ViewHolder> impl
         public void bind(API api, Context context) {
             tvTitle.setText(api.getTitle());
 
-            NavController navController = Navigation.findNavController((Activity) context, R.id.nav_host_fragment);
             container.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    NavController navController = Navigation.findNavController((Activity) context, R.id.nav_host_fragment);
                     Bundle arguments = new Bundle();
                     arguments.putParcelable("api", Parcels.wrap(api));
                     navController.navigate(R.id.nav_detail_view, arguments);
