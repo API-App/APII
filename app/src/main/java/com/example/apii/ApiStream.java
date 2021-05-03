@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -68,6 +69,8 @@ public class ApiStream extends Fragment {
         adapter = new ApiAdapter(getContext(),apis);
         rvApis.setAdapter(adapter);
         rvApis.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvApis.addItemDecoration(new DividerItemDecoration(getContext(),
+                DividerItemDecoration.VERTICAL));
 
         try {
             selectedCat = getArguments().getString("selectedCat");

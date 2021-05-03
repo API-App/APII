@@ -68,15 +68,18 @@ public class ApiAdapter extends RecyclerView.Adapter<ApiAdapter.ViewHolder> impl
 
         RelativeLayout container;
         TextView tvTitle;
+        TextView tvDescription;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tvTitle);
+            tvDescription = itemView.findViewById(R.id.tv_description);
             container = itemView.findViewById(R.id.container);
         }
 
         public void bind(API api, Context context) {
             tvTitle.setText(api.getTitle());
+            tvDescription.setText(api.getDescription());
 
             container.setOnClickListener(new View.OnClickListener() {
                 @Override
