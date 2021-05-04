@@ -100,9 +100,9 @@ public class Categories extends Fragment {
     // Adds search to the menu
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.api_menu, menu);
+        inflater.inflate(R.menu.cat_menu, menu);
 
-        SearchView searchView = (SearchView) menu.findItem(R.id.search_api).getActionView();
+        SearchView searchView = (SearchView) menu.findItem(R.id.search_cat).getActionView();
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
