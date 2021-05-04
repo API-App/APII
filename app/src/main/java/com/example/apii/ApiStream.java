@@ -164,13 +164,4 @@ public class ApiStream extends Fragment {
             }
         });
     }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.filter_api) {
-            // TODO: Add the Filter redirect here
-            Toast.makeText(getContext(), "Filter", Toast.LENGTH_LONG).show();
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }
