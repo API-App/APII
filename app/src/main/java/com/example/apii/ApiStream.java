@@ -1,13 +1,12 @@
 package com.example.apii;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,6 +19,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
@@ -47,8 +47,6 @@ public class ApiStream extends Fragment {
     private ApiAdapter adapter;
     private List<API> apis;
     String selectedCat;
-    Toolbar toolbar;
-    MenuItem filter_api;
 
     public ApiStream() {
         // Required empty public constructor
@@ -63,11 +61,8 @@ public class ApiStream extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_api_stream, container, false);
-        toolbar = getActivity().findViewById(R.id.api_menu);
-//        toolbar.setOnMenuItemClickListener(this::onMenuItemClick);
         // Inflate the layout for this fragment
-        return rootView;
+        return inflater.inflate(R.layout.fragment_api_stream, container, false);
     }
 
     @Override
@@ -83,16 +78,11 @@ public class ApiStream extends Fragment {
 
         try {
             selectedCat = getArguments().getString("selectedCat");
+            ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(selectedCat);
             makeRequest(selectedCat);
         } catch(NullPointerException e){
             makeRequest();
         }
-
-
-        filter_api = view.findViewById(R.id.filter_api);
-
-
-
 
     }
 
@@ -154,16 +144,6 @@ public class ApiStream extends Fragment {
         });
     }
 
-//    public boolean onMenuItemClick(MenuItem menuItem) {
-//        switch (menuItem.getItemId()) {
-//            case R.id.filter_api:
-//                Intent intent = new Intent(getActivity(),FilterActivity.class);
-//                startActivity(intent);
-//                return true;
-//        }
-//        return false;
-//    }
-
     // Adds search to the menu
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -183,5 +163,14 @@ public class ApiStream extends Fragment {
                 return false;
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.filter_api) {
+            // TODO: Add the Filter redirect here
+            Toast.makeText(getContext(), "Filter", Toast.LENGTH_LONG).show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
