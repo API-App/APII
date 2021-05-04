@@ -1,10 +1,13 @@
 package com.example.apii;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -43,6 +47,8 @@ public class ApiStream extends Fragment {
     private ApiAdapter adapter;
     private List<API> apis;
     String selectedCat;
+    Toolbar toolbar;
+    MenuItem filter_api;
 
     public ApiStream() {
         // Required empty public constructor
@@ -57,8 +63,11 @@ public class ApiStream extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_api_stream, container, false);
+        toolbar = getActivity().findViewById(R.id.api_menu);
+//        toolbar.setOnMenuItemClickListener(this::onMenuItemClick);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_api_stream, container, false);
+        return rootView;
     }
 
     @Override
@@ -78,6 +87,12 @@ public class ApiStream extends Fragment {
         } catch(NullPointerException e){
             makeRequest();
         }
+
+
+        filter_api = view.findViewById(R.id.filter_api);
+
+
+
 
     }
 
@@ -138,6 +153,16 @@ public class ApiStream extends Fragment {
             }
         });
     }
+
+//    public boolean onMenuItemClick(MenuItem menuItem) {
+//        switch (menuItem.getItemId()) {
+//            case R.id.filter_api:
+//                Intent intent = new Intent(getActivity(),FilterActivity.class);
+//                startActivity(intent);
+//                return true;
+//        }
+//        return false;
+//    }
 
     // Adds search to the menu
     @Override
