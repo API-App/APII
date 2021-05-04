@@ -73,7 +73,7 @@ public class ApiAdapter extends RecyclerView.Adapter<ApiAdapter.ViewHolder> impl
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tvTitle);
-            tvDescription = itemView.findViewById(R.id.tv_description);
+            tvDescription = itemView.findViewById(R.id.tvDescription);
             container = itemView.findViewById(R.id.container);
         }
 
