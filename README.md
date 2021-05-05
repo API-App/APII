@@ -154,3 +154,14 @@ Here's a walkthrough of implemented user stories:
 <img src="https://github.com/API-App/APII/blob/main/gifs/sprint3.gif" width=200>
 
 GIF created with [Gif Maker](https://play.google.com/store/apps/details?id=com.media.zatashima.studio&hl=en_US&gl=US).
+
+## Final Sprint
+### Completed Stories
+- [x] Sharing Apis
+- [x] App icon made
+- [x] App theme changes 
+
+### Video Walkthrough
+Here's a walkthrough of implemented user stories:
+
+<img src="https://github.com/API-App/APII/blob/main/APII_Final_Sprint.gif" width=200>
